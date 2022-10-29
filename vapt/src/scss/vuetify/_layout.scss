@@ -1,0 +1,18 @@
+.logo-icon {
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media (min-width: 1025px) {
+  .logo-width {
+    min-width: 254px;
+  }
+}
+
+.v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined),
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: $box-shadow;
+}

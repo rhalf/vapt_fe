@@ -1,0 +1,11 @@
+@import "layout";
+@import "sidebar";
+@import "card";
+@import "text";
+@import "button";
+@import "form";
+@import "datatable";
+
+.theme--light .v-main {
+  background-color: #3b54c5;
+}
