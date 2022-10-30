@@ -50,7 +50,7 @@
 
                 <v-row dense class="mt-3">
                   <v-col>
-                    <BaseButton class="primary" block @click="login">
+                    <BaseButton class="primary" block @click="loginHandler">
                       Login
                     </BaseButton>
                   </v-col>
@@ -91,10 +91,8 @@ import BaseTextButton from "@/components/common/BaseTextButton";
 
 import image from "@/assets/frames/vehicles.svg";
 
-import { auth } from "@/plugins/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
 // import { getAll, get, update, remove } from "@/api/users";
+import { login } from "@/api/session";
 
 export default {
   components: {
@@ -141,17 +139,21 @@ export default {
   },
 
   methods: {
-    login() {
-      signInWithEmailAndPassword(auth, this.form.email, this.form.password)
+    loginHandler() {
+      login(this.form.email, this.form.password)
         .then((userCredential) => {
           // Signed in
           const { user } = userCredential;
-          console.log(user);
-          // ...
+          console.log("login", user);
         })
         .catch((error) => {
           const { code, message } = error;
           console.log(code, message);
+
+          this.$root.snackbar({
+            color: "error",
+            message: `${code} - ${message}`,
+          });
         });
     },
   },

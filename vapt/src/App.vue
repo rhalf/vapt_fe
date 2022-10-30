@@ -40,15 +40,24 @@
     <v-main>
       <router-view />
     </v-main>
+
+    <BaseSnackbar ref="snackbar" />
   </v-app>
 </template>
 
 <script>
+import BaseSnackbar from "@/components/common/BaseSnackbar";
+
 export default {
   name: "App",
-
+  components: {
+    BaseSnackbar,
+  },
   data: () => ({
     //
   }),
+  mounted() {
+    this.$root.snackbar = this.$refs.snackbar.open;
+  },
 };
 </script>

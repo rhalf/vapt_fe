@@ -7,12 +7,21 @@ const routes = [
       {
         path: "login",
         name: "AccountLogin",
-        component: () => import("@/views/account/components/LoginView.vue"),
+        meta: { authenticated: false },
+        component: () => import("@/views/account/components/AccountLogin.vue"),
+      },
+      {
+        path: "verify",
+        name: "AccountVerify",
+        meta: { authenticated: true },
+        component: () => import("@/views/account/components/AccountVerify.vue"),
       },
       {
         path: "register",
         name: "AccountRegister",
-        component: () => import("@/views/account/components/RegisterView.vue"),
+        meta: { authenticated: false },
+        component: () =>
+          import("@/views/account/components/AccountRegister.vue"),
       },
     ],
   },

@@ -1,9 +1,11 @@
 <template>
-  <router-view />
+  <v-content class="primary" style="height: 100vh">
+    <router-view />
+  </v-content>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style scoped></style>

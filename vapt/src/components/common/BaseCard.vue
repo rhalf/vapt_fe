@@ -5,7 +5,6 @@
     :ripple="false"
     :max-width="maxWidth"
     :min-width="minWidth"
-    @click="$emit('click')"
   >
     <slot />
   </v-card>

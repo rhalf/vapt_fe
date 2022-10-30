@@ -15,8 +15,11 @@ const getAll = async () => {
   const users = [];
   const collectionRef = collection(firestore, collectionName);
   const snapshots = await getDocs(collectionRef);
-  snapshots.forEach((snapshots) => {
-    users.push({ id: snapshots.id, ...snapshots.data() });
+  snapshots.forEach(async (snapshots) => {
+    let user = { id: snapshots.id, ...snapshots.data() };
+    user.role = await getDoc(user.role.path);
+    user.status = await getDoc(user.status.path);
+    users.push(user);
   });
   return users;
 };
@@ -24,7 +27,11 @@ const getAll = async () => {
 const get = async (id) => {
   const docRef = doc(firestore, collectionName, id);
   const snapshots = await getDoc(docRef);
-  return { id: snapshots.id, ...snapshots.data() };
+
+  let user = { id: snapshots.id, ...snapshots.data() };
+  user.role = (await getDoc(user.role)).data();
+  user.status = (await getDoc(user.status)).data();
+  return user;
 };
 
 const create = async (user) => {
