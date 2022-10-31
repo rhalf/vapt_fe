@@ -1,7 +1,7 @@
 <template>
-  <v-content class="primary" style="height: 100vh">
+  <v-main class="primary" style="height: 100vh">
     <router-view />
-  </v-content>
+  </v-main>
 </template>
 
 <script>

@@ -7,6 +7,8 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  query,
+  where,
 } from "firebase/firestore";
 
 const collectionName = "users";
@@ -34,12 +36,47 @@ const get = async (id) => {
   return user;
 };
 
-const create = async (user) => {
+const getByUid = async (uid) => {
   const colRef = collection(firestore, collectionName);
-  const result = await addDoc(colRef, user);
-  // console.log(result);
-  return result;
+
+  const q = await query(colRef, where("uid", "==", uid));
+  const snapshots = await getDocs(q);
+
+  var snapshot = snapshots.docs[0];
+  var user = {
+    id: snapshot.id,
+    ...snapshot.data(),
+  };
+
+  user.role = (await getDoc(user.role)).data();
+  user.status = (await getDoc(user.status)).data();
+  return user;
 };
+
+const create = async (uid) => {
+  const docRoleRef = doc(firestore, "roles", "dDNB8z8K9qvl9MuEP3Wk");
+  const docStatusRef = doc(firestore, "statuses", "hftlETVZoIEVppU33iqv");
+
+  const user = {
+    uid: uid,
+    role: docRoleRef,
+    status: docStatusRef,
+  };
+
+  console.log(user);
+
+  const colRef = collection(firestore, collectionName);
+  return addDoc(colRef, user);
+};
+
+// const createDefault = async (id) => {
+//   let user = { id: id };
+//   const docRoleRef = doc(auth, "roles", 0);
+//   const docStatusRef = doc(auth, "statuses", 0);
+//   user.role = docRoleRef;
+//   user.status = docStatusRef;
+//   return create(user);
+// };
 
 const update = async (user) => {
   const docRef = doc(firestore, collectionName, user.id);
@@ -52,4 +89,4 @@ const remove = async (user) => {
   return await deleteDoc(docRef, user);
 };
 
-export { getAll, get, create, update, remove };
+export { getAll, get, getByUid, create, update, remove };

@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { logout } from "@/api/session";
+import { signOut } from "@/api/session";
 
 export default {
   methods: {
     logoutHandler() {
-      logout();
+      signOut();
     },
   },
 };

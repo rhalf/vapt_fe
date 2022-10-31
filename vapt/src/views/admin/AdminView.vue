@@ -1,17 +1,17 @@
 <template>
   <div>
     <router-view></router-view>
-    <v-btn @click="logoutHandler">Logout</v-btn>
+    <v-btn @click="signOutHandler">Logout</v-btn>
   </div>
 </template>
 
 <script>
-import { logout } from "@/api/session";
+import { signOut } from "@/api/session";
 
 export default {
   methods: {
-    logoutHandler() {
-      logout();
+    signOutHandler() {
+      signOut();
     },
   },
 };

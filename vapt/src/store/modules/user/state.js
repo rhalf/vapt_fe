@@ -1,6 +1,7 @@
 const state = () => {
   return {
     user: null,
+    detail: null,
   };
 };
 

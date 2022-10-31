@@ -11,10 +11,10 @@ const routes = [
         component: () => import("@/views/account/components/AccountLogin.vue"),
       },
       {
-        path: "verify",
-        name: "AccountVerify",
-        meta: { authenticated: true },
-        component: () => import("@/views/account/components/AccountVerify.vue"),
+        path: "reset",
+        name: "AccountReset",
+        meta: { authenticated: false },
+        component: () => import("@/views/account/components/AccountReset.vue"),
       },
       {
         path: "register",

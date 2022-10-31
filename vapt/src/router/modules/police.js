@@ -7,7 +7,7 @@ const routes = [
       {
         path: "dashboard",
         name: "PoliceDashboard",
-        meta: { authenticated: true, type: "ADMIN" },
+        meta: { authenticated: true, type: "POLICE" },
         component: () =>
           import("@/views/police/components/PoliceDashboard.vue"),
       },

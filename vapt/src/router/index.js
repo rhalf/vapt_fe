@@ -8,10 +8,18 @@ import police from "./modules/police.js";
 Vue.use(VueRouter);
 
 const routes = [
-  // { path: "/", name: "Dasboard", meta: { authenticated: true, type: "ADMIN" } },
   ...account,
   ...admin,
   ...police,
+  {
+    path: "/page/not-found",
+    name: "PageNotFound",
+    component: () => import("@/views/page/NotFound.vue"),
+  },
+  {
+    path: "*",
+    redirect: "/page/not-found",
+  },
 ];
 
 const router = new VueRouter({
