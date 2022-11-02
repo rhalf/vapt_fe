@@ -15,7 +15,7 @@ onAuthStateChanged(auth, async (user) => {
     console.log("SIGNED_OUT", user);
     await store.dispatch("user/setUser", null);
     await store.dispatch("user/setDetail", null);
-    router.push({ name: "AccountLogin" }).catch(() => {});
+    router.push({ name: "AccountSignIn" }).catch(() => {});
   }
 });
 
@@ -33,9 +33,8 @@ router.beforeEach(async (to, from, next) => {
         if (detail.role.value === "ADMIN") next({ name: "AdminDashboard" });
         if (detail.role.value === "POLICE") next({ name: "PoliceDashboard" });
       }
-    } else next({ name: "AccountLogin" });
+    } else next({ name: "AccountSignIn" });
   } else {
-    console.log("to", to);
     next();
   }
 });

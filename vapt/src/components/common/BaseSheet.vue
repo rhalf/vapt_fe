@@ -1,5 +1,5 @@
 <template>
-  <v-sheet :class="customClass">
+  <v-sheet :class="customClass" class="pa-8">
     <slot></slot>
   </v-sheet>
 </template>

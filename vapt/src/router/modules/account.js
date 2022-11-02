@@ -6,9 +6,9 @@ const routes = [
     children: [
       {
         path: "login",
-        name: "AccountLogin",
+        name: "AccountSignIn",
         meta: { authenticated: false },
-        component: () => import("@/views/account/components/AccountLogin.vue"),
+        component: () => import("@/views/account/components/AccountSignIn.vue"),
       },
       {
         path: "reset",
@@ -18,10 +18,9 @@ const routes = [
       },
       {
         path: "register",
-        name: "AccountRegister",
+        name: "AccountSignUp",
         meta: { authenticated: false },
-        component: () =>
-          import("@/views/account/components/AccountRegister.vue"),
+        component: () => import("@/views/account/components/AccountSignUp.vue"),
       },
     ],
   },

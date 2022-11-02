@@ -12,26 +12,29 @@
               <v-col class="text-center">
                 <div class="pa-10">
                   <v-row dense>
-                    <v-col> <BaseSubTitle>Welcome to</BaseSubTitle></v-col>
+                    <v-col>
+                      <BaseSubTitle>
+                        IoT-Based Real-time Vehicle Accident and Tracking System
+                      </BaseSubTitle>
+                    </v-col>
                   </v-row>
 
                   <v-row dense class="mt-3">
                     <v-col>
                       <BaseTitle class="font-weight-bold">
-                        IoT-Based Real-time
-                      </BaseTitle>
-                    </v-col>
-                  </v-row>
-
-                  <v-row dense>
-                    <v-col>
-                      <BaseTitle class="font-weight-bold">
-                        Vehicle Accident and Tracking System
+                        Register an Account?
                       </BaseTitle>
                     </v-col>
                   </v-row>
 
                   <v-row dense class="mt-8">
+                    <v-col>
+                      <BaseTextInput v-model="form.name" placeholder="Name">
+                      </BaseTextInput>
+                    </v-col>
+                  </v-row>
+
+                  <v-row dense class="mt-3">
                     <v-col>
                       <BaseEmailInput
                         v-model="form.email"
@@ -42,9 +45,28 @@
 
                   <v-row dense class="mt-3">
                     <v-col>
+                      <BaseMobileInput
+                        v-model="form.mobile"
+                        placeholder="Mobile Number"
+                      >
+                      </BaseMobileInput>
+                    </v-col>
+                  </v-row>
+
+                  <v-row dense class="mt-3">
+                    <v-col>
                       <BasePasswordInput
-                        v-model="form.password"
-                        placeholder="Password"
+                        v-model="form.password1"
+                        placeholder="Enter Password"
+                      ></BasePasswordInput>
+                    </v-col>
+                  </v-row>
+
+                  <v-row dense class="mt-3">
+                    <v-col>
+                      <BasePasswordInput
+                        v-model="form.password2"
+                        placeholder="Retype Password"
                       ></BasePasswordInput>
                     </v-col>
                   </v-row>
@@ -54,9 +76,9 @@
                       <BaseButton
                         class="primary"
                         block
-                        @click="handleSubmit(signInHandler)"
+                        @click="handleSubmit(registerHandler)"
                       >
-                        Login
+                        Register
                       </BaseButton>
                     </v-col>
                   </v-row>
@@ -77,9 +99,9 @@
                     </v-col>
                     <v-col>
                       <BaseTextButton
-                        @click="$router.push({ name: 'AccountRegister' })"
+                        @click="$router.push({ name: 'AccountSignIn' })"
                       >
-                        Create an Account?
+                        Sign In?
                       </BaseTextButton>
                     </v-col>
                   </v-row>
@@ -101,15 +123,17 @@ import BaseSubTitle from "@/components/common/BaseSubTitle";
 import BaseButton from "@/components/common/BaseButton";
 import BasePasswordInput from "@/components/common/BasePasswordInput";
 import BaseEmailInput from "@/components/common/BaseEmailInput";
+import BaseTextInput from "@/components/common/BaseTextInput";
+import BaseMobileInput from "@/components/common/BaseMobileInput";
 import BaseTextButton from "@/components/common/BaseTextButton";
 import BaseImage from "@/components/common/BaseImage";
 
 import image from "@/assets/frames/vehicles.svg";
 
+import { create } from "@/api/users";
+
 // import { getAll, get, update, remove } from "@/api/users";
-import { signIn } from "@/api/session";
-import { getByUid } from "@/api/users";
-import { mapActions } from "vuex";
+import { signUp, updateDetails, emailVerification } from "@/api/session";
 
 export default {
   components: {
@@ -120,6 +144,8 @@ export default {
     BaseButton,
     BasePasswordInput,
     BaseEmailInput,
+    BaseTextInput,
+    BaseMobileInput,
     BaseTextButton,
     BaseImage,
   },
@@ -127,77 +153,62 @@ export default {
     return {
       image,
       form: {
+        // name: "rhalf",
         // email: "rhalfcaacbay@gmail.com",
-        // password: "321321321",
+        // mobile: "9176088771",
+        // password1: "321321321",
+        // password2: "321321321",
+        name: null,
         email: null,
-        password: null,
+        mobile: null,
+        password1: null,
+        password2: null,
       },
     };
   },
-  mounted() {
-    // console.log(getAll());
-    // console.log(get("MOO8R9k7TE8cXDfktBxF"));
-    // console.log(
-    //   create({ name: "maricel", type: "ADMIN", status: "FOR_APPROVAL" })
-    // );
-    // console.log(
-    //   update({
-    //     id: "MOO8R9k7TE8cXDfktBxF",
-    //     name: "pre",
-    //     type: "ADMIN",
-    //     status: "FOR_APPROVAL",
-    //   })
-    // );
-    // console.log(
-    //   remove({
-    //     id: "RwIwpbahLQ9QVEDf4XOS",
-    //     name: "pre",
-    //     type: "ADMIN",
-    //     status: "FOR_APPROVAL",
-    //   })
-    // );
-  },
+  mounted() {},
 
   methods: {
-    ...mapActions("user", ["setUser", "setDetail"]),
-    signInHandler() {
-      this.$root.loading.show();
-      signIn(this.form.email, this.form.password)
+    registerHandler() {
+      if (this.form.password1 !== this.form.password2) {
+        this.$root.snackbar({
+          color: "error",
+          message: "Passwords didn't matched!",
+        });
+        return;
+      }
+
+      signUp(this.form.email, this.form.password1)
         .then(async (userCredential) => {
           // Signed in
           const { user } = userCredential;
-          this.setUser(user);
 
-          await getByUid(user.uid)
-            .then((data) => {
-              this.setDetail(data);
-              if (data.role.value === "ADMIN")
-                this.$router.push({ name: "AdminDashboard" }).catch(() => {});
-              if (data.role.value === "POLICE")
-                this.$router.push({ name: "PoliceDashboard" }).catch(() => {});
-              if (data.role.value === "NONE") {
-                this.$root.snackbar({
-                  color: "warning",
-                  message:
-                    "Your account is under process and will require admin's approval.",
-                });
-              }
+          await create(user.uid);
+
+          await emailVerification();
+
+          updateDetails(this.form.name, this.form.mobile)
+            .then(() => {
+              this.$root.snackbar({
+                color: "success",
+                message: `Added a user with email ${user.email} successfully!`,
+              });
+              this.$router.push({ name: "AccountSignIn" });
             })
             .catch((error) => {
+              const { message } = error;
               this.$root.snackbar({
                 color: "error",
-                message: error.message,
+                message: message,
               });
             });
         })
         .catch((error) => {
+          const { message } = error;
           this.$root.snackbar({
             color: "error",
-            message: error.message,
+            message: message,
           });
-        })
-        .finally(() => {
-          this.$root.loading.hide();
         });
     },
   },

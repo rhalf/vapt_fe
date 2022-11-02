@@ -25,7 +25,7 @@ export default {
     },
     minWidth: {
       type: Number,
-      default: 1024,
+      default: 240,
     },
   },
   mixins: [customClass],

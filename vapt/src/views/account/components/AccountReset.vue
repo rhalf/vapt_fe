@@ -57,16 +57,16 @@
                   <v-row dense class="mt-5">
                     <v-col>
                       <BaseTextButton
-                        @click="$router.push({ name: 'AccountLogin' })"
+                        @click="$router.push({ name: 'AccountSignIn' })"
                       >
                         Sign In?
                       </BaseTextButton>
                     </v-col>
                     <v-col>
                       <BaseTextButton
-                        @click="$router.push({ name: 'AccountRegister' })"
+                        @click="$router.push({ name: 'AccountSignUp' })"
                       >
-                        Create an Account?
+                        Sign Up an Account?
                       </BaseTextButton>
                     </v-col>
                   </v-row>
@@ -147,7 +147,7 @@ export default {
             color: "success",
             message: "Reset password link is sent to your email.",
           });
-          this.$router.push({ name: "AccountLogin" });
+          this.$router.push({ name: "AccountSignIn" });
         })
         .catch((error) => {
           this.$root.snackbar({

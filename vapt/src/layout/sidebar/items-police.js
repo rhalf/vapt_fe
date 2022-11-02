@@ -4,15 +4,15 @@ export default [
     icon: "mdi-view-dashboard",
     to: "/dashboard",
     meta: {
-      userType: ["EXTERNAL_USER", "INTERNAL_USER"],
+      roles: ["ADMIN", "POLICE"],
     },
   },
   {
-    title: "Internal User",
-    icon: "mdi-domain",
+    title: "Manage Users",
+    icon: "mdi-account-group",
     group: "internal",
     meta: {
-      userType: ["INTERNAL_USER"],
+      roles: ["ADMIN"],
     },
     children: [
       {
@@ -32,7 +32,7 @@ export default [
     icon: "mdi-web",
     group: "external",
     meta: {
-      userType: ["INTERNAL_USER"],
+      roles: ["POLICE"],
     },
     children: [
       {

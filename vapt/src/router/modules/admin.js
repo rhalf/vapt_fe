@@ -10,6 +10,13 @@ const routes = [
         meta: { authenticated: true, type: "ADMIN" },
         component: () => import("@/views/admin/components/AdminDashboard.vue"),
       },
+
+      {
+        path: "users",
+        name: "AdminUsers",
+        meta: { authenticated: true, type: "ADMIN" },
+        component: () => import("@/views/admin/components/AdminUsers.vue"),
+      },
     ],
   },
 ];

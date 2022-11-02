@@ -1,18 +1,12 @@
 <template>
-  <div>
-    <router-view></router-view>
-    <v-btn @click="signOutHandler">Logout</v-btn>
-  </div>
+  <LayoutMain></LayoutMain>
 </template>
 
 <script>
-import { signOut } from "@/api/session";
+import LayoutMain from "@/layout/LayoutMain";
 
 export default {
-  methods: {
-    signOutHandler() {
-      signOut();
-    },
-  },
+  components: { LayoutMain },
+  methods: {},
 };
 </script>

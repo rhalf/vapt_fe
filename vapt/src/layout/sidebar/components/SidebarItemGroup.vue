@@ -1,5 +1,10 @@
 <template>
-  <v-list-group :no-action="noAction" :sub-group="subGroup" :group="item.group">
+  <v-list-group
+    :no-action="noAction"
+    :sub-group="subGroup"
+    :group="item.group"
+    color="white"
+  >
     <template v-slot:activator>
       <v-list-item-icon>
         <v-icon>{{ item.icon }}</v-icon>
@@ -16,7 +21,7 @@
         sub-group
       />
 
-      <SidebarItem v-else :key="`item-${i}`" :item="child" />
+      <SidebarItem class="pl-16" v-else :key="`item-${i}`" :item="child" />
     </template>
   </v-list-group>
 </template>

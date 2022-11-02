@@ -8,6 +8,7 @@ import {
   updateProfile,
   sendEmailVerification,
   sendPasswordResetEmail,
+  listUsers,
 } from "firebase/auth";
 
 export const signIn = (email, password) => {
@@ -44,4 +45,17 @@ export const emailVerification = () => {
 
 export const passwordResetEmail = (email) => {
   return sendPasswordResetEmail(auth, email);
+};
+
+export const getAllUsers = (nextPageToken) => {
+  // List batch of users, 1000 at a time.
+  return listUsers(20, nextPageToken).then((users) => {
+    users.users.forEach((userRecord) => {
+      console.log("user", userRecord.toJSON());
+    });
+    // if (users.pageToken) {
+    //   // List next batch of users.
+    //   listAllUsers(users.pageToken);
+    // }
+  });
 };
