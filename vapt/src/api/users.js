@@ -53,17 +53,16 @@ const getByUid = async (uid) => {
   return user;
 };
 
-const create = async (uid) => {
+const create = async (uid, name) => {
   const docRoleRef = doc(firestore, "roles", "dDNB8z8K9qvl9MuEP3Wk");
   const docStatusRef = doc(firestore, "statuses", "hftlETVZoIEVppU33iqv");
 
   const user = {
     uid: uid,
+    name: name,
     role: docRoleRef,
     status: docStatusRef,
   };
-
-  console.log(user);
 
   const colRef = collection(firestore, collectionName);
   return addDoc(colRef, user);

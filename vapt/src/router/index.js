@@ -12,6 +12,10 @@ const routes = [
   ...admin,
   ...police,
   {
+    path: "/",
+    redirect: { name: "AdminDashboard" },
+  },
+  {
     path: "/page/not-found",
     name: "PageNotFound",
     component: () => import("@/views/page/NotFound.vue"),

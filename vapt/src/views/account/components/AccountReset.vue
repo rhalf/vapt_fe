@@ -1,87 +1,84 @@
 <template>
   <v-row>
     <v-col class="d-flex align-center justify-center">
-      <BaseSheet custom-class="ma-8">
-        <BaseCard custom-class="rounded">
-          <ValidationObserver v-slot="{ handleSubmit }" ref="form">
-            <v-row dense>
-              <v-col>
-                <BaseImage :src="image"></BaseImage>
-              </v-col>
-              <v-divider vertical></v-divider>
-              <v-col class="text-center">
-                <div class="pa-10">
-                  <v-row dense>
-                    <v-col>
-                      <BaseSubTitle>
-                        IoT-Based Real-time Vehicle Accident and Tracking System
-                      </BaseSubTitle>
-                    </v-col>
-                  </v-row>
+      <BaseCard custom-class="rounded mt-16" :width="1024">
+        <ValidationObserver v-slot="{ handleSubmit }" ref="form">
+          <v-row dense>
+            <v-col>
+              <BaseImage :src="image"></BaseImage>
+            </v-col>
+            <v-divider vertical></v-divider>
+            <v-col class="text-center">
+              <div class="pa-10">
+                <v-row dense>
+                  <v-col>
+                    <BaseSubTitle>
+                      IoT-Based Real-time Vehicle Accident and Tracking System
+                    </BaseSubTitle>
+                  </v-col>
+                </v-row>
 
-                  <v-row dense class="mt-3">
-                    <v-col>
-                      <BaseTitle class="font-weight-bold">
-                        Forgot your password?
-                      </BaseTitle>
-                    </v-col>
-                  </v-row>
+                <v-row dense class="mt-3">
+                  <v-col>
+                    <BaseTitle class="font-weight-bold">
+                      Forgot your password?
+                    </BaseTitle>
+                  </v-col>
+                </v-row>
 
-                  <v-row dense class="mt-8">
-                    <v-col>
-                      <BaseEmailInput
-                        v-model="form.email"
-                        placeholder="Email Address"
-                      ></BaseEmailInput>
-                    </v-col>
-                  </v-row>
+                <v-row dense class="mt-8">
+                  <v-col>
+                    <BaseEmailInput
+                      v-model="form.email"
+                      placeholder="Email Address"
+                    ></BaseEmailInput>
+                  </v-col>
+                </v-row>
 
-                  <v-row dense class="mt-3">
-                    <v-col>
-                      <BaseButton
-                        class="primary"
-                        block
-                        @click="handleSubmit(resetHandler)"
-                      >
-                        Reset
-                      </BaseButton>
-                    </v-col>
-                  </v-row>
+                <v-row dense class="mt-3">
+                  <v-col>
+                    <BaseButton
+                      class="primary"
+                      block
+                      @click="handleSubmit(resetHandler)"
+                    >
+                      Reset
+                    </BaseButton>
+                  </v-col>
+                </v-row>
 
-                  <v-row dense class="mt-5">
-                    <v-col>
-                      <v-divider></v-divider>
-                    </v-col>
-                  </v-row>
+                <v-row dense class="mt-5">
+                  <v-col>
+                    <v-divider></v-divider>
+                  </v-col>
+                </v-row>
 
-                  <v-row dense class="mt-5">
-                    <v-col>
-                      <BaseTextButton
-                        @click="$router.push({ name: 'AccountSignIn' })"
-                      >
-                        Sign In?
-                      </BaseTextButton>
-                    </v-col>
-                    <v-col>
-                      <BaseTextButton
-                        @click="$router.push({ name: 'AccountSignUp' })"
-                      >
-                        Sign Up an Account?
-                      </BaseTextButton>
-                    </v-col>
-                  </v-row>
-                </div>
-              </v-col>
-            </v-row>
-          </ValidationObserver>
-        </BaseCard>
-      </BaseSheet>
+                <v-row dense class="mt-5">
+                  <v-col>
+                    <BaseTextButton
+                      @click="$router.push({ name: 'AccountSignIn' })"
+                    >
+                      Sign In?
+                    </BaseTextButton>
+                  </v-col>
+                  <v-col>
+                    <BaseTextButton
+                      @click="$router.push({ name: 'AccountSignUp' })"
+                    >
+                      Sign Up an Account?
+                    </BaseTextButton>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-col>
+          </v-row>
+        </ValidationObserver>
+      </BaseCard>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import BaseSheet from "@/components/common/BaseSheet";
 import BaseCard from "@/components/common/BaseCard";
 import BaseTitle from "@/components/common/BaseTitle";
 import BaseSubTitle from "@/components/common/BaseSubTitle";
@@ -97,7 +94,6 @@ import { passwordResetEmail } from "@/api/session";
 
 export default {
   components: {
-    BaseSheet,
     BaseCard,
     BaseTitle,
     BaseSubTitle,

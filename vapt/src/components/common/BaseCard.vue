@@ -5,6 +5,7 @@
     :ripple="false"
     :max-width="maxWidth"
     :min-width="minWidth"
+    :width="width"
   >
     <slot />
   </v-card>

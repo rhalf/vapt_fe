@@ -35,10 +35,13 @@
 
       <v-list>
         <v-list-item
-          v-for="link in links"
+          v-for="link in notificationLinks"
           :key="link.routeName"
           @click="gotoHandler(link.routeName)"
         >
+          <v-list-item-icon>
+            <v-icon right>{{ link.icon }}</v-icon>
+          </v-list-item-icon>
           <v-list-item-title>{{ link.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
@@ -59,7 +62,7 @@
 
       <v-list>
         <v-list-item
-          v-for="link in links"
+          v-for="link in accountLinks"
           :key="link.routeName"
           @click="gotoHandler(link.routeName)"
         >
@@ -88,7 +91,11 @@ export default {
   },
   data() {
     return {
-      links: [
+      notificationLinks: [
+        // { routeName: "ChangePassword", title: "Change Password" },
+        { icon: "mdi-car", routeName: "Accident", title: "Accident" },
+      ],
+      accountLinks: [
         // { routeName: "ChangePassword", title: "Change Password" },
         { icon: "mdi-logout-variant", routeName: "SignOut", title: "Sign Out" },
       ],

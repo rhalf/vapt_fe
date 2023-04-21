@@ -36,6 +36,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    width: {
+      type: Number,
+      default: 480,
+    },
   },
   computed: {
     classes() {
